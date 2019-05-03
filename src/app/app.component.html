@@ -10,9 +10,11 @@
       <p>Mis à jour: {{ lastUpdate | async | date: "short" }}</p>
       <ul class="list-group">
         <app-appareil
-          *ngFor="let appareil of appareils"
+          *ngFor="let appareil of appareils; let i = index"
           [appareilName]="appareil.name"
           [appareilStatus]="appareil.status"
+          class="mb-3"
+          [index]="i"
         ></app-appareil>
       </ul>
       <button
@@ -21,6 +23,13 @@
         (click)="onAllumer()"
       >
         Maitrise Totale
+      </button>
+      <button
+        class="btn btn-success"
+        [disabled]="!isAuth"
+        (click)="onEteindre()"
+      >
+        Aucune Maitrise
       </button>
     </div>
   </div>

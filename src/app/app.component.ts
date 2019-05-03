@@ -1,11 +1,12 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { AppareilService } from "./services/appareil.service";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = "WHY I LOVE MODJO";
   isAuth = false;
   lastUpdate = new Promise((resolve, reject) => {
@@ -15,35 +16,30 @@ export class AppComponent {
     }, 2000);
   });
 
-  appareils = [
-    {
-      name: "Assis",
-      status: "oui"
-    },
-    {
-      name: "Roule",
-      status: "oui"
-    },
-    {
-      name: "Fais le mort",
-      status: "non"
-    },
-    {
-      name: "Couché",
-      status: "oui"
-    },
-    {
-      name: "La patte",
-      status: "oui"
-    }
-  ];
+  appareils: any[];
 
-  constructor() {
+  constructor(private appareilService: AppareilService) {
     setTimeout(() => {
       this.isAuth = true;
     }, 4000);
   }
+
+  ngOnInit() {
+    this.appareils = this.appareilService.appareils;
+  }
+
   onAllumer() {
+    this.appareilService.switchOnAll();
     console.log("Il maitrise touuuuuut!");
+  }
+
+  onEteindre() {
+    if (
+      confirm("Vous êtes sûr de lui enlever toute cette maitrise de la force?")
+    ) {
+      this.appareilService.swithOffAll();
+    } else {
+      return null;
+    }
   }
 }

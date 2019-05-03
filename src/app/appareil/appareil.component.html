@@ -5,16 +5,30 @@
     'list-group-item-danger': appareilStatus === 'non'
   }"
 >
-  <div
+  <!-- <div
     style="width:20px;height:20px;background-color:tomato"
     *ngIf="appareilStatus === 'non'"
   ></div>
   <div
     style="width:20px;height:20px;background-color:chartreuse"
     *ngIf="appareilStatus === 'oui'"
-  ></div>
+  ></div> -->
   <h4 [ngStyle]="{ color: getColor() }">
     Tour: {{ appareilName }} -- Maitrise: {{ getStatus() }}
   </h4>
   <input type="text" class="form-control" [(ngModel)]="appareilName" />
+  <button
+    class="btn btn-sm btn-success"
+    *ngIf="appareilStatus === 'non'"
+    (click)="onSwitch()"
+  >
+    Maitrise?
+  </button>
+  <button
+    class="btn btn-sm btn-success"
+    *ngIf="appareilStatus === 'oui'"
+    (click)="onSwitch()"
+  >
+    Pas Maitrise?
+  </button>
 </li>
