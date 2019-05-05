@@ -16,19 +16,22 @@
   <h4 [ngStyle]="{ color: getColor() }">
     Tour: {{ appareilName }} -- Maitrise: {{ getStatus() }}
   </h4>
+  <a [routerLink]="[id]">Détails</a>
   <input type="text" class="form-control" [(ngModel)]="appareilName" />
-  <button
-    class="btn btn-sm btn-success"
-    *ngIf="appareilStatus === 'non'"
-    (click)="onSwitch()"
-  >
-    Maitrise?
-  </button>
-  <button
-    class="btn btn-sm btn-success"
-    *ngIf="appareilStatus === 'oui'"
-    (click)="onSwitch()"
-  >
-    Pas Maitrise?
-  </button>
+  <div class="d-flex justify-content-end">
+    <button
+      class="btn btn-sm btn-success mt-2 d-flex"
+      *ngIf="appareilStatus === 'non'"
+      (click)="onSwitch()"
+    >
+      Maitrise?
+    </button>
+    <button
+      class="btn btn-sm btn-success mt-2 d-flex"
+      *ngIf="appareilStatus === 'oui'"
+      (click)="onSwitch()"
+    >
+      Pas Maitrise?
+    </button>
+  </div>
 </li>
